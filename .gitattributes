@@ -1,0 +1,24 @@
+# Définir le comportement par défaut pour tous les fichiers
+* text=auto
+
+# Forcer les fichiers texte à utiliser LF
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+
+# Fichiers binaires qui ne doivent pas être modifiés
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary 

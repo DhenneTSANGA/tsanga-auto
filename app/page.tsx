@@ -12,7 +12,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0 z-0">
-          <img src="/placeholder.svg?height=600&width=1920" alt="Luxury car" className="w-full h-full object-cover" />
+          <img src="/hero.png" alt="Luxury car" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50" />
         </div>
 

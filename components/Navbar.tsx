@@ -67,8 +67,9 @@ export default function Navbar() {
       <div className="container mx-auto px-4 h-16 flex items-center">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link href="/" className="font-bold text-xl text-primary">
-            Tsanga-Auto
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/dark.png" alt="Tsanga-Auto" className="h-20 w-auto" />
+            <span className="font-bold text-xl text-primary italic">Tsanga-Auto</span>
           </Link>
         </div>
         

@@ -6,22 +6,53 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
   const supabase = createMiddlewareClient({ req, res })
 
-  // Rafraîchir la session si nécessaire
-  await supabase.auth.getSession()
+  // Vérifier la session
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  // Protection de la page de configuration
+  if (req.nextUrl.pathname === '/setup') {
+    // Vérifier si un admin existe déjà
+    const { data: { users }, error: listError } = await supabase.auth.admin.listUsers()
+    
+    if (!listError) {
+      const adminExists = users.some(user => user.user_metadata?.role === 'admin')
+      if (adminExists) {
+        return NextResponse.redirect(new URL('/', req.url))
+      }
+    }
+    return res
+  }
+
+  // Si l'utilisateur n'est pas connecté et essaie d'accéder à une route admin
+  if (!session && req.nextUrl.pathname.startsWith('/admin')) {
+    const redirectUrl = new URL('/auth/login', req.url)
+    redirectUrl.searchParams.set('redirectTo', req.nextUrl.pathname)
+    return NextResponse.redirect(redirectUrl)
+  }
+
+  // Si l'utilisateur est connecté mais n'est pas admin et essaie d'accéder à une route admin
+  if (session && req.nextUrl.pathname.startsWith('/admin')) {
+    const { data: { user } } = await supabase.auth.getUser()
+    const isAdmin = user?.user_metadata?.role === 'admin'
+
+    if (!isAdmin) {
+      return NextResponse.redirect(new URL('/', req.url))
+    }
+  }
 
   return res
 }
 
-// Spécifier les routes qui nécessitent l'authentification
+// Configurer les routes à protéger
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
-    '/((?!_next/static|_next/image|favicon.ico|public/).*)',
-  ],
+    '/setup',
+    '/admin/:path*',
+    '/profile/:path*',
+    '/mes-vehicules/:path*',
+    '/favoris/:path*',
+    '/parametres/:path*'
+  ]
 } 

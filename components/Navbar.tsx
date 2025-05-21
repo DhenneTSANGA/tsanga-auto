@@ -23,7 +23,8 @@ import {
   Heart,
   Settings,
   Menu,
-  CarFront
+  CarFront,
+  LayoutDashboard
 } from 'lucide-react'
 import {
   Sheet,
@@ -33,6 +34,9 @@ import {
 
 export default function Navbar() {
   const { user, loading, signOut } = useAuth()
+
+  // Vérifier si l'utilisateur est un administrateur
+  const isAdmin = user?.user_metadata?.role === 'admin'
 
   const mainNavItems = [
     { href: '/', label: 'Accueil', icon: Home },
@@ -133,6 +137,17 @@ export default function Navbar() {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                {isAdmin && (
+                  <>
+                    <DropdownMenuItem asChild>
+                      <Link href="/admin/dashboard" className="flex items-center gap-2">
+                        <LayoutDashboard className="h-4 w-4" />
+                        Administration
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
                 <DropdownMenuItem asChild>
                   <Link href="/profile" className="flex items-center gap-2">
                     <User className="h-4 w-4" />

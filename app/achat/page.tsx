@@ -214,7 +214,7 @@ export default function PurchasePage() {
                         </li>
                       </ul>
                       <Button asChild>
-                        <Link href="/vehicles">Voir nos véhicules</Link>
+                        <Link href="/vehicules">Voir nos véhicules</Link>
                       </Button>
                     </div>
                     <div className="md:w-1/2">
@@ -569,7 +569,7 @@ export default function PurchasePage() {
               variant="outline"
               className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
             >
-              <Link href="/vehicles">Voir nos véhicules</Link>
+              <Link href="/vehicules">Voir nos véhicules</Link>
             </Button>
             <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
               <Link href="/contact">Demander un rendez-vous</Link>

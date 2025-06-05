@@ -371,7 +371,7 @@ export default function BlogPage() {
             <Link href="/contact">Nous contacter</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/vehicles">Voir nos véhicules</Link>
+            <Link href="/vehicules">Voir nos véhicules</Link>
           </Button>
         </div>
       </section>

@@ -273,7 +273,7 @@ export default function ContactPage() {
           variant="outline"
           className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
         >
-          <a href="/vehicles">Voir nos véhicules</a>
+          <a href="/vehicules">Voir nos véhicules</a>
         </Button>
       </section>
     </div>
